@@ -39,7 +39,7 @@ end
 
 ConfigLibrary.EditValue = function(Value)
 	if typeof(Value) == "Color3" then
-		return "Color3_("..Value:ToHex()..")"
+		return "Color3_("..math.floor(Value.R * 255)..", "..math.floor(Value.G * 255)..", "..math.floor(Value.B * 255)..")"
 	elseif typeof(Value) == "Vector3" or typeof(Value) == "Vector2" or typeof(Value) == "CFrame" then
 		return typeof(Value).."_("..tostring(Value)..")"
 	elseif typeof(Value) == "EnumItem" then
@@ -51,10 +51,15 @@ end
 
 ConfigLibrary.RestoreValue = function(Value)
 	if type(Value) == "string" then
-		local Type, Content = string.match(Value, "(%w+)_%("), string.match(Value, "%w+_%((.+)%)")
+		local Type, Content = string.match(Value, "(%w+)_%((.+)%)")
 
 		if Type == "Color3" then
-			return Color3.fromHex(Content)
+			Content = string.split(Content, ", ")
+			for i, v in next, Content do
+				Content[i] = tonumber(v)
+			end
+
+			return Color3.fromRGB(unpack(Content))
 		elseif Type == "Vector3" or Type == "Vector2" or Type == "CFrame" then
 			Content = string.split(Content, ", ")
 

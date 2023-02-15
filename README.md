@@ -127,7 +127,7 @@ ConfigLibrary:Recursive(TestTable, warn)
 ```
 Output:
 
-![image](https://user-images.githubusercontent.com/76539058/218898896-a277e595-4727-4928-9614-bc3bdd1f550c.png)
+![image](https://user-images.githubusercontent.com/76539058/218914924-cec542d4-a783-43e9-88c7-f6acd5973f02.png)
 
 # Install
 

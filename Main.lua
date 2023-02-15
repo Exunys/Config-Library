@@ -38,8 +38,6 @@ ConfigLibrary.Recursive = function(self, Table, Callback)
 end
 
 ConfigLibrary.EditValue = function(Value)
-	--assert(Value, "ConfigLibrary.EditValue => Parameter \"Value\" is missing!")
-
 	if typeof(Value) == "Color3" then
 		return "Color3_("..Value:ToHex()..")"
 	elseif typeof(Value) == "Vector3" or typeof(Value) == "Vector2" or typeof(Value) == "CFrame" then
@@ -52,10 +50,8 @@ ConfigLibrary.EditValue = function(Value)
 end
 
 ConfigLibrary.RestoreValue = function(Value)
-	--assert(Value, "ConfigLibrary.RestoreValue => Parameter \"Value\" is missing!")
-
 	if type(Value) == "string" then
-		local Type, Content = string.match(Value, "(.+)_%("), string.match(Value, ".+_%((.+)%)")
+		local Type, Content = string.match(Value, "(%w+)_%("), string.match(Value, "%w+_%((.+)%)")
 
 		if Type == "Color3" then
 			return Color3.fromHex(Content)

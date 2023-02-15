@@ -38,7 +38,7 @@ ConfigLibrary.Recursive = function(self, Table, Callback)
 end
 
 ConfigLibrary.EditValue = function(Value)
-	assert(Value, "ConfigLibrary.EditValue => Parameter \"Value\" is missing!")
+	--assert(Value, "ConfigLibrary.EditValue => Parameter \"Value\" is missing!")
 
 	if typeof(Value) == "Color3" then
 		Value = "Color3_("..math.floor(Value.R * 255)..", "..math.floor(Value.G * 255)..", "..math.floor(Value.B * 255)..")"
@@ -52,7 +52,7 @@ ConfigLibrary.EditValue = function(Value)
 end
 
 ConfigLibrary.RestoreValue = function(Value)
-	assert(Value, "ConfigLibrary.RestoreValue => Parameter \"Value\" is missing!")
+	--assert(Value, "ConfigLibrary.RestoreValue => Parameter \"Value\" is missing!")
 
 	if type(Value) == "string" then
 		local Type, Content = string.match(Value, "(.+)_%("), string.match(Value, ".+_%((.+)%)")

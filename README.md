@@ -17,13 +17,13 @@ For loading configs, the library decodes the JSON table (turns it into a Lua tab
 
 # Documentation
 
-## ConfigLibrary.**Encode**(*\<table> Table*)
+## ConfigLibrary.**Encode**(*\<table> Table*) --> Encoded Lua Table (To JSON) <string>
 - Encodes *Table* to JSON format.
 ```lua
 print(ConfigLibrary.Encode({Bool = true})) -- {"Bool":true}
 ```
-## ConfigLibrary.**Decode**(*\<string> Content*)
-- Decodes JSON Table (*Content*) to a Lua table.
+## ConfigLibrary.**Decode**(*\<string> Content*) --> Decoded JSON Table <table>
+- Decodes JSON Table (*Content*) & converts it to a Lua table.
 ```lua
 print(ConfigLibrary.Decode([[{"Bool":true}]])[1]) -- true
 ```
@@ -53,17 +53,53 @@ ConfigLibrary:Recursive(TestTable, warn)
 Output:
 
 ![image](https://user-images.githubusercontent.com/76539058/218896002-0955af45-d75d-4e26-b02a-6eed2d2e71bf.png)
-## ConfigLibrary.**EditValue**(*\<any> Value*)
+## ConfigLibrary.**EditValue**(*\<any> Value*) --> Edited Value <any>
 - Edits the parsed value's type to the library's signature type.
 ```lua
 print(ConfigLibrary.EditValue(Color3.fromRGB(50, 100, 200))) -- Color3_(50, 100, 200)
 ```
-## ConfigLibrary.**RestoreValue**(*\<any> Value*)
+## ConfigLibrary.**RestoreValue**(*\<any> Value*) --> Restored Value <any>
 - Edits the parsed value (if the value's type is the library's signature type) to a default Luau value.
 ```lua
 print(ConfigLibrary.RestoreValue("Color3_(50, 100, 200)")) -- 50, 100, 200 <Color3>
 ```
-## ConfigLibrary:**ConvertValues**(*\<table> Data*, *\<string> Method*)
+## ConfigLibrary:**CloneTable**(*\<table> Table*) --> Clone <table>
+- Clones the parsed Table and returns the Clone.
+```lua
+local TestTable = {
+	Bool = true,
+	Number = 123,
+	String = "Hello",
+	Color = Color3.fromRGB(255, 255, 255),
+	InnerTable = {
+		Color2 = Color3.fromRGB(150, 150, 150),
+		InnerInnerTable = {
+			Color3_ = Color3.fromRGB(100, 100, 100),
+			Vector3_ = Vector3.new(50, 200, 100),
+			Vector2_ = Vector2.new(10, 20),
+			InnerInnerInnerTable = {
+				Key = Enum.KeyCode.X
+			}
+		}
+	}
+}
+
+local Clone = ConfigLibrary:CloneTable(TestTable)
+
+print(TestTable)
+print(Clone)
+print(TestTable == Clone)
+
+print(string.rep("=", 25))
+
+ConfigLibrary:Recursive(TestTable, warn)
+print(string.rep("=", 10).."Clone"..string.rep("=", 10))
+ConfigLibrary:Recursive(Clone, warn)
+```
+Output:
+
+![image](https://user-images.githubusercontent.com/76539058/219037944-a3561fba-3a39-46d0-9a8d-6b4c3333cc71.png)
+## ConfigLibrary:**ConvertValues**(*\<table> Data*, *\<string> Method*) --> Result (Converted Data) <table>
 - Edits all the values of parsed table (*Data*) depending on the *Method*.
 - "Edit" method calls ConfigLibrary.**EditValue** function.
 - "Restore" method calls ConfigLibrary.**RestoreValue** function.
@@ -116,7 +152,7 @@ ConfigLibrary:SaveConfig("a/b/c/d/test.json", TestTable)
 ```
 ![image](https://user-images.githubusercontent.com/76539058/218898447-39d76d20-27f1-4878-8d8b-118493779de8.png)
 ![image](https://user-images.githubusercontent.com/76539058/218898455-abd7a78f-6d14-47e2-bc14-78aeec70df7e.png)
-### ConfigLibrary:**LoadConfig**(*\<string> Path*, *\<table> Data*)
+## ConfigLibrary:**LoadConfig**(*\<string> Path*, *\<table> Data*) --> Config <table>
 - Opens the file located at *Path* and decodes the JSON table and restores its values to Luau format.
 ```lua
 local TestTable = {}

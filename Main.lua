@@ -106,7 +106,8 @@ ConfigLibrary.SaveConfig = function(self, Path, Data)
 	assert(type(Path) == "string", "ConfigLibrary.SaveConfig => Parameter \"Path\" must be of type <string>. Type given: <"..type(Path)..">")
 	assert(type(Data) == "table", "ConfigLibrary.SaveConfig => Parameter \"Data\" must be of type <table>. Type given: <"..type(Data)..">")
 
-	local Result = self.Encode(self:ConvertValues(Data, "Edit"))
+	local Result = Data
+	Result = self.Encode(self:ConvertValues(Result, "Edit"))
 
 	if select(2, pcall(function() readfile(Path) end)) then
 		self.CreatePath(self, Path, Result)

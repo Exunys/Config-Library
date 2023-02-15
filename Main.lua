@@ -77,8 +77,6 @@ ConfigLibrary.RestoreValue = function(Value)
 end
 
 ConfigLibrary.CloneTable = function(self, Object, Seen)
-	assert(Object, "ConfigLibrary.CloneTable => Parameter \"Object\" is missing!")
-
 	if type(Object) ~= "table" then return Object end
 	if Seen and Seen[Object] then return Seen[Object] end
 

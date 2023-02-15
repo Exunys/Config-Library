@@ -76,13 +76,31 @@ ConfigLibrary.RestoreValue = function(Value)
 	return Value
 end
 
+ConfigLibrary.CloneTable = function(self, Object, Seen)
+	assert(Object, "ConfigLibrary.CloneTable => Parameter \"Object\" is missing!")
+
+	if type(Object) ~= "table" then return Object end
+	if Seen and Seen[Object] then return Seen[Object] end
+
+	local LocalSeen = Seen or {}
+	local Result = setmetatable({}, getmetatable(Object))
+
+	LocalSeen[Object] = Result
+
+	for i, v in next, Object do
+		Result[self:CloneTable(i, LocalSeen)] = self:CloneTable(v, LocalSeen)
+	end
+
+	return Result
+end
+
 ConfigLibrary.ConvertValues = function(self, Data, Method)
 	assert(Data, "ConfigLibrary.ConvertValues => Parameter \"Data\" is missing!")
 	assert(Method, "ConfigLibrary.ConvertValues => Parameter \"Method\" is missing!")
 	assert(type(Data) == "table", "ConfigLibrary.ConvertValues => Parameter \"Data\" must be of type <table>. Type given: <"..type(Data)..">")
 	assert(type(Method) == "string", "ConfigLibrary.ConvertValues => Parameter \"Method\" must be of type <string>. Type given: <"..type(Method)..">")
 
-	local Result, Passed, Stack = Data, {[Data] = true}, {Data}
+	local Passed, Stack = {[Data] = true}, {Data}
 
 	repeat
 		local Current = table.remove(Stack) -- "Pop"
@@ -97,7 +115,7 @@ ConfigLibrary.ConvertValues = function(self, Data, Method)
 		end
 	until #Stack == 0
 
-	return Result
+	return Data
 end
 
 ConfigLibrary.SaveConfig = function(self, Path, Data)
@@ -106,8 +124,7 @@ ConfigLibrary.SaveConfig = function(self, Path, Data)
 	assert(type(Path) == "string", "ConfigLibrary.SaveConfig => Parameter \"Path\" must be of type <string>. Type given: <"..type(Path)..">")
 	assert(type(Data) == "table", "ConfigLibrary.SaveConfig => Parameter \"Data\" must be of type <table>. Type given: <"..type(Data)..">")
 
-	local Result = Data
-	Result = self.Encode(self:ConvertValues(Result, "Edit"))
+	local Result = self.Encode(self:ConvertValues(self:CloneTable(Data), "Edit"))
 
 	if select(2, pcall(function() readfile(Path) end)) then
 		self.CreatePath(self, Path, Result)

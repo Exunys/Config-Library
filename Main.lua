@@ -73,7 +73,7 @@ ConfigLibrary.RestoreValue = function(Value)
 			end
 
 			Value = getfenv()[Type].new(unpack(Content))
-		elseif typeof(Value) == "EnumItem" then
+		elseif Value == "EnumItem" then
 			Value = loadstring("return Enum."..Content)()
 		end
 	end

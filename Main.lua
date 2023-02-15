@@ -1,6 +1,6 @@
 --[[
 
-	Config Library by Exunys © CC0 1.0 (2023)
+	Config Library by Exunys © CC0 1.0 Universal (2023)
 	https://github.com/Exunys
 
 ]]

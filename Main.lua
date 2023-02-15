@@ -41,7 +41,7 @@ ConfigLibrary.EditValue = function(Value)
 	--assert(Value, "ConfigLibrary.EditValue => Parameter \"Value\" is missing!")
 
 	if typeof(Value) == "Color3" then
-		return "Color3_("..math.floor(Value.R * 255)..", "..math.floor(Value.G * 255)..", "..math.floor(Value.B * 255)..")"
+		return "Color3_("..Value:ToHex()..")"
 	elseif typeof(Value) == "Vector3" or typeof(Value) == "Vector2" or typeof(Value) == "CFrame" then
 		return typeof(Value).."_("..tostring(Value)..")"
 	elseif typeof(Value) == "EnumItem" then
@@ -58,13 +58,7 @@ ConfigLibrary.RestoreValue = function(Value)
 		local Type, Content = string.match(Value, "(.+)_%("), string.match(Value, ".+_%((.+)%)")
 
 		if Type == "Color3" then
-			Content = string.split(Content, ", ")
-
-			for i, v in next, Content do
-				Content[i] = tonumber(v)
-			end
-
-			return Color3.fromRGB(unpack(Content))
+			return Color3.fromHex(Content)
 		elseif Type == "Vector3" or Type == "Vector2" or Type == "CFrame" then
 			Content = string.split(Content, ", ")
 

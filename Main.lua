@@ -41,11 +41,11 @@ ConfigLibrary.EditValue = function(Value)
 	--assert(Value, "ConfigLibrary.EditValue => Parameter \"Value\" is missing!")
 
 	if typeof(Value) == "Color3" then
-		Value = "Color3_("..math.floor(Value.R * 255)..", "..math.floor(Value.G * 255)..", "..math.floor(Value.B * 255)..")"
+		return "Color3_("..math.floor(Value.R * 255)..", "..math.floor(Value.G * 255)..", "..math.floor(Value.B * 255)..")"
 	elseif typeof(Value) == "Vector3" or typeof(Value) == "Vector2" or typeof(Value) == "CFrame" then
-		Value = typeof(Value).."_("..tostring(Value)..")"
+		return typeof(Value).."_("..tostring(Value)..")"
 	elseif typeof(Value) == "EnumItem" then
-		Value = "EnumItem_("..string.match(tostring(Value), "Enum%.(.+)")..")"
+		return "EnumItem_("..string.match(tostring(Value), "Enum%.(.+)")..")"
 	end
 
 	return Value
@@ -64,7 +64,7 @@ ConfigLibrary.RestoreValue = function(Value)
 				Content[i] = tonumber(v)
 			end
 
-			Value = Color3.fromRGB(unpack(Content))
+			return Color3.fromRGB(unpack(Content))
 		elseif Type == "Vector3" or Type == "Vector2" or Type == "CFrame" then
 			Content = string.split(Content, ", ")
 
@@ -72,9 +72,9 @@ ConfigLibrary.RestoreValue = function(Value)
 				Content[i] = tonumber(v)
 			end
 
-			Value = getfenv()[Type].new(unpack(Content))
+			return getfenv()[Type].new(unpack(Content))
 		elseif Type == "EnumItem" then
-			Value = loadstring("return Enum."..Content)()
+			return loadstring("return Enum."..Content)()
 		end
 	end
 

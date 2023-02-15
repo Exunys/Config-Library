@@ -193,6 +193,13 @@ local ESP_Settings = {}
 
 ESP_Settings = Library:LoadConfig("My Cool Hub/Config.json")
 ```
+```lua
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Config-Library/main/Main.lua"))():SaveConfig("test.json", {b = "c", d = {e = "f", g = {h = "i", j = {"k"}}}})
+```
+->
+```json
+{"b":"c","d":{"e":"f","g":{"h":"i","j":["k"]}}}
+```
 # Contact Information
 - **[Discord](https://discord.com/users/611111398818316309)**
 - **[E-Mail](mailto:exunys@gang.email)**

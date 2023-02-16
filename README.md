@@ -1,4 +1,7 @@
-# Config Library [![Visitors](https://visitor-badge.glitch.me/badge?page_id=Exunys.Config-Library)](https://github.com/Exunys/Config-Library)
+# ⚙️Config Library [![Visitors](https://visitor-badge.glitch.me/badge?page_id=Exunys.Config-Library)](https://github.com/Exunys/Config-Library)
+
+| [Install](https://github.com/Exunys/Config-Library#Install) | [Documentation](https://github.com/Exunys/Config-Library#Documentation) | [Examples](https://github.com/Exunys/Config-Library#Examples) | [Contact Information](https://github.com/Exunys/Config-Library#Contact-Information) |
+| :---: | :---: | :---: | :---: |
 
 This library allows you to save the settings of your script in the easiest way possible. This library handles converting of datatypes like *Color3* into *strings* in the way so the table can be encoded into JSON format without any `null` values.
 
@@ -15,7 +18,15 @@ For loading configs, the library decodes the JSON table (turns it into a Lua tab
 - **`CFrame.new(...)`** -> **`"CFrame_(...)"`**
 - **`Enum[...]`** -> **`"EnumItem_(...)"`**
 
-# Documentation
+# 💻Install
+
+You can load this library into your script's environment by copying the code below.
+
+```lua
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Config-Library/main/Main.lua"))()
+```
+
+# 📑Documentation
 
 ## ConfigLibrary.**Encode**(*\<table> Table*) --> JSON-Encoded Lua Table \<string>
 - Encodes *Table* to JSON format.
@@ -165,13 +176,9 @@ Output:
 
 ![image](https://user-images.githubusercontent.com/76539058/218914924-cec542d4-a783-43e9-88c7-f6acd5973f02.png)
 
-# Install
+# 📝Examples
 
-```lua
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Config-Library/main/Main.lua"))()
-```
-# Examples
-
+### Saving a configuration:
 ```lua
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Config-Library/main/Main.lua"))()
 
@@ -186,6 +193,8 @@ Library:SaveConfig("My Cool Hub/Config.json", ESP_Settings)
 ```
 ![image](https://user-images.githubusercontent.com/76539058/218899502-8edd80ae-c6f1-4192-b5af-2f3a21e1e7ce.png)
 ![image](https://user-images.githubusercontent.com/76539058/218899512-649d067e-cce6-42c0-8c7f-c49ef2a6db81.png)
+
+### Loading a configuration:
 ```lua
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Config-Library/main/Main.lua"))()
 
@@ -193,6 +202,7 @@ local ESP_Settings = {}
 
 ESP_Settings = Library:LoadConfig("My Cool Hub/Config.json")
 ```
+##
 ```lua
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Config-Library/main/Main.lua"))():SaveConfig("test.json", {b = "c", d = {e = "f", g = {h = "i", j = {"k"}}}})
 ```
@@ -200,6 +210,6 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Config-Library
 ```json
 {"b":"c","d":{"e":"f","g":{"h":"i","j":["k"]}}}
 ```
-# Contact Information
+# 📧Contact Information
 - **[Discord](https://discord.com/users/611111398818316309)**
 - **[E-Mail](mailto:exunys@gang.email)**

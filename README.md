@@ -27,18 +27,19 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Exuny
 ```
 
 # 📑Documentation
-
-## ConfigLibrary.**Encode**(*\<table> Table*) --> JSON-Encoded Lua Table \<string>
+### ConfigLibrary.**Encode**(*\<table> Table*) --> JSON-Encoded Lua Table \<string>
 - Encodes *Table* to JSON format.
 ```lua
 print(ConfigLibrary.Encode({Bool = true})) -- {"Bool":true}
 ```
-## ConfigLibrary.**Decode**(*\<string> Content*) --> Decoded JSON Table \<table>
+##
+### ConfigLibrary.**Decode**(*\<string> Content*) --> Decoded JSON Table \<table>
 - Decodes JSON Table (*Content*) & converts it to a Lua table.
 ```lua
 print(ConfigLibrary.Decode([[{"Bool":true}]])[1]) -- true
 ```
-## ConfigLibrary:**Recursive**(*\<table> Table*, *\<function> Callback*)
+##
+### ConfigLibrary:**Recursive**(*\<table> Table*, *\<function> Callback*)
 - Iterates through nested / inner tables. Will pass through every value and call *Callback* with the parameters **i** (index of value) & **v** (value).
 ```lua
 local TestTable = {
@@ -64,17 +65,20 @@ ConfigLibrary:Recursive(TestTable, warn)
 Output:
 
 ![image](https://user-images.githubusercontent.com/76539058/218896002-0955af45-d75d-4e26-b02a-6eed2d2e71bf.png)
-## ConfigLibrary.**EditValue**(*\<any> Value*) --> Edited Value \<any>
+##
+### ConfigLibrary.**EditValue**(*\<any> Value*) --> Edited Value \<any>
 - Edits the parsed value's type to the library's signature type.
 ```lua
 print(ConfigLibrary.EditValue(Color3.fromRGB(50, 100, 200))) -- Color3_(50, 100, 200)
 ```
-## ConfigLibrary.**RestoreValue**(*\<any> Value*) --> Restored Value \<any>
+##
+### ConfigLibrary.**RestoreValue**(*\<any> Value*) --> Restored Value \<any>
 - Edits the parsed value (if the value's type is the library's signature type) to a default Luau value.
 ```lua
 print(ConfigLibrary.RestoreValue("Color3_(50, 100, 200)")) -- 50, 100, 200 <Color3>
 ```
-## ConfigLibrary:**CloneTable**(*\<table> Table*) --> Clone \<table>
+##
+### ConfigLibrary:**CloneTable**(*\<table> Table*) --> Clone \<table>
 - Clones the parsed Table and returns the Clone.
 ```lua
 local TestTable = {
@@ -110,7 +114,8 @@ ConfigLibrary:Recursive(Clone, warn)
 Output:
 
 ![image](https://user-images.githubusercontent.com/76539058/219037944-a3561fba-3a39-46d0-9a8d-6b4c3333cc71.png)
-## ConfigLibrary:**ConvertValues**(*\<table> Data*, *\<string> Method*) --> Result (Converted Data) \<table>
+##
+### ConfigLibrary:**ConvertValues**(*\<table> Data*, *\<string> Method*) --> Result (Converted Data) \<table>
 - Edits all the values of parsed table (*Data*) depending on the *Method*.
 - `"Edit"` method calls ConfigLibrary.**EditValue** function.
 - `"Restore"` method calls ConfigLibrary.**RestoreValue** function.
@@ -138,7 +143,8 @@ ConfigLibrary:Recursive(ConfigLibrary:ConvertValues(TestTable, "Edit"), warn)
 Output:
 
 ![image](https://user-images.githubusercontent.com/76539058/218897458-a520863f-db4f-4c18-a47d-ee00a651b2fd.png)
-## ConfigLibrary:**SaveConfig**(*\<string> Path*, *\<table> Data*)
+##
+### ConfigLibrary:**SaveConfig**(*\<string> Path*, *\<table> Data*)
 - Converts the parsed *Data*'s values to the library's signature values and later encodes the result to a JSON table. The JSON-Encoded table later gets saved at the parsed *Path*. If *Path* doesn't exist, the library creates the path and the file with the given extension (with folders and everything).
 ```lua
 local TestTable = {
@@ -163,7 +169,8 @@ ConfigLibrary:SaveConfig("a/b/c/d/test.json", TestTable)
 ```
 ![image](https://user-images.githubusercontent.com/76539058/218898447-39d76d20-27f1-4878-8d8b-118493779de8.png)
 ![image](https://user-images.githubusercontent.com/76539058/218898455-abd7a78f-6d14-47e2-bc14-78aeec70df7e.png)
-## ConfigLibrary:**LoadConfig**(*\<string> Path*, *\<table> Data*) --> Config \<table>
+##
+### ConfigLibrary:**LoadConfig**(*\<string> Path*, *\<table> Data*) --> Config \<table>
 - Opens the file located at *Path* and decodes the JSON table and restores its values to Luau format.
 ```lua
 local TestTable = {}
@@ -175,9 +182,8 @@ ConfigLibrary:Recursive(TestTable, warn)
 Output:
 
 ![image](https://user-images.githubusercontent.com/76539058/218914924-cec542d4-a783-43e9-88c7-f6acd5973f02.png)
-
+##
 # 📝Examples
-
 ### Saving a configuration:
 ```lua
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Config-Library/main/Main.lua"))()

@@ -5,11 +5,18 @@
 
 This library allows you to save the settings of your script in the easiest way possible. This library handles converting of datatypes like *Color3* into *strings* in the way so the table can be encoded into JSON format without any `null` values.
 
-### `Color3.fromRGB(255, 255, 255)` (*Raw*) > `"Color3_(255, 255, 255)"` (*Config Library Archive*)
+> #### `Color3.fromRGB(255, 255, 255)` (*Raw*) > `"Color3_(255, 255, 255)"` (*Config Library Archive*)
 
 For loading configs, the library decodes the JSON table (turns it into a Lua table) and later restores all the values by checking the signature types.
 
-### `"Vector3_(10, 50, 20)"` (*Config Library Archive*) > `Vector3.new(10, 50, 20)` (*Raw*)
+> #### `"Vector3_(10, 50, 20)"` (*Config Library Archive*) > `Vector3.new(10, 50, 20)` (*Raw*)
+
+Your script executor must support the following filesystem functions in order for the library to function:
+- ***readfile***
+- ***isfile***
+- ***writefile***
+- ***isfolder***
+- ***makefolder*** 
 
 ## Signatures
 - **`Color3.fromRGB(...)`** -> **`"Color3_(...)"`**

@@ -112,8 +112,8 @@ Output:
 ![image](https://user-images.githubusercontent.com/76539058/219037944-a3561fba-3a39-46d0-9a8d-6b4c3333cc71.png)
 ## ConfigLibrary:**ConvertValues**(*\<table> Data*, *\<string> Method*) --> Result (Converted Data) \<table>
 - Edits all the values of parsed table (*Data*) depending on the *Method*.
-- "Edit" method calls ConfigLibrary.**EditValue** function.
-- "Restore" method calls ConfigLibrary.**RestoreValue** function.
+- `"Edit"` method calls ConfigLibrary.**EditValue** function.
+- `"Restore"` method calls ConfigLibrary.**RestoreValue** function.
 ```lua
 local TestTable = {
 	Bool = true,

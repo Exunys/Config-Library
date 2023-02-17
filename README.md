@@ -1,7 +1,7 @@
 # ⚙️Config Library [![Visitors](https://visitor-badge.glitch.me/badge?page_id=Exunys.Config-Library)](https://github.com/Exunys/Config-Library)
 
-| [Install](https://github.com/Exunys/Config-Library#Install) | [Documentation](https://github.com/Exunys/Config-Library#Documentation) | [Examples](https://github.com/Exunys/Config-Library#Examples) | [Contact Information](https://github.com/Exunys/Config-Library#Contact-Information) |
-| :---: | :---: | :---: | :---: |
+| [Library](https://github.com/Exunys/Config-Library/blob/main/Main.lua) | [Install](https://github.com/Exunys/Config-Library#Install) | [Documentation](https://github.com/Exunys/Config-Library#Documentation) | [Examples](https://github.com/Exunys/Config-Library#Examples) | [Contact Information](https://github.com/Exunys/Config-Library#Contact-Information) |
+| :---: | :---: | :---: | :---: | :---: |
 
 This library allows you to save the settings of your script in the easiest way possible. This library handles converting of datatypes like *Color3* into *strings* in the way so the table can be encoded into JSON format without any `null` values.
 

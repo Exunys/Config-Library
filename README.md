@@ -177,7 +177,7 @@ ConfigLibrary:SaveConfig("a/b/c/d/test.json", TestTable)
 ![image](https://user-images.githubusercontent.com/76539058/218898447-39d76d20-27f1-4878-8d8b-118493779de8.png)
 ![image](https://user-images.githubusercontent.com/76539058/218898455-abd7a78f-6d14-47e2-bc14-78aeec70df7e.png)
 ##
-### ConfigLibrary:**LoadConfig**(*\<string> Path*, *\<table> Data*) --> Config \<table>
+### ConfigLibrary:**LoadConfig**(*\<string> Path*) --> Config \<table>
 - Opens the file located at *Path* and decodes the JSON table and restores its values to Luau format.
 ```lua
 local TestTable = {}

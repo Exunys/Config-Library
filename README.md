@@ -1,4 +1,4 @@
-# ⚙️Config Library [![Visitors](https://visitor-badge.laobi.icu/badge?page_id=Exunys.Config-Library)](https://github.com/Exunys/Config-Library)
+# ⚙️Config Library [![Visitors](https://visitor-badge.laobi.icu/badge?page_id=Exunys.Config-Library&right_color=grey)](https://github.com/Exunys/Config-Library)
 
 | [Library](https://github.com/Exunys/Config-Library/blob/main/Main.lua) | [Install](https://github.com/Exunys/Config-Library#Install) | [Documentation](https://github.com/Exunys/Config-Library#Documentation) | [Examples](https://github.com/Exunys/Config-Library#Examples) | [Contact Information](https://github.com/Exunys/Config-Library#Contact-Information) |
 | :---: | :---: | :---: | :---: | :---: |

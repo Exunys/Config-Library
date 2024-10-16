@@ -1,11 +1,15 @@
 --[[
 
-	Config Library by Exunys © CC0 1.0 Universal (2023)
+	Config Library by Exunys © CC0 1.0 Universal (2023 - 2024)
 	https://github.com/Exunys
 
 ]]
 
-local HttpService, ConfigLibrary = game:GetService("HttpService"), {}
+local cloneref = cloneref or function(...)
+	return ...
+end
+
+local HttpService, ConfigLibrary = cloneref(game:GetService("HttpService")), {}
 
 ConfigLibrary.Encode = function(Table)
 	assert(Table, "ConfigLibrary.Encode => Parameter \"Table\" is missing!")
@@ -28,11 +32,11 @@ ConfigLibrary.Recursive = function(self, Table, Callback)
 	assert(type(Table) == "table", "ConfigLibrary.Recursive => Parameter \"Table\" must be of type <table>. Type given: <"..type(Table)..">")
 	assert(type(Callback) == "function", "ConfigLibrary.Recursive => Parameter \"Callback\" must be of type <string>. Type given: <"..type(Callback)..">")
 
-	for i, v in next, Table do
-		Callback(i, v)
+	for Index, Value in next, Table do
+		Callback(Index, Value)
 
-		if type(v) == "table" then
-			self:Recursive(v, Callback)
+		if type(Value) == "table" then
+			self:Recursive(Value, Callback)
 		end
 	end
 end
@@ -55,19 +59,20 @@ ConfigLibrary.RestoreValue = function(Value)
 
 		if Type == "Color3" then
 			Content = string.split(Content, ", ")
-			for i, v in next, Content do
-				Content[i] = tonumber(v)
+
+			for Index, _Value in next, Content do
+				Content[Index] = tonumber(_Value)
 			end
 
-			return Color3.fromRGB(unpack(Content))
+			return Color3.fromRGB(table.unpack(Content))
 		elseif Type == "Vector3" or Type == "Vector2" or Type == "CFrame" then
 			Content = string.split(Content, ", ")
 
-			for i, v in next, Content do
-				Content[i] = tonumber(v)
+			for Index, _Value in next, Content do
+				Content[Index] = tonumber(_Value)
 			end
 
-			return getfenv()[Type].new(unpack(Content))
+			return getfenv()[Type].new(table.unpack(Content))
 		elseif Type == "EnumItem" then
 			return loadstring("return Enum."..Content)()
 		end
@@ -85,8 +90,8 @@ ConfigLibrary.CloneTable = function(self, Object, Seen)
 
 	LocalSeen[Object] = Result
 
-	for i, v in next, Object do
-		Result[self:CloneTable(i, LocalSeen)] = self:CloneTable(v, LocalSeen)
+	for Index, Value in next, Object do
+		Result[self:CloneTable(Index, LocalSeen)] = self:CloneTable(Value, LocalSeen)
 	end
 
 	return Result
@@ -103,12 +108,12 @@ ConfigLibrary.ConvertValues = function(self, Data, Method)
 	repeat
 		local Current = table.remove(Stack) -- "Pop"
 
-		for i, v in next, Current do
-			if type(v) == "table" and not Passed[v] then
-				Passed[v] = true
-				Stack[#Stack + 1] = v -- "Push" to stack
+		for Index, Value in next, Current do
+			if type(Value) == "table" and not Passed[Value] then
+				Passed[Value] = true
+				Stack[#Stack + 1] = Value -- "Push" to stack
 			else
-				Current[i] = self[Method.."Value"](v)
+				Current[Index] = self[Method.."Value"](Value)
 			end
 		end
 	until #Stack == 0
@@ -145,8 +150,8 @@ ConfigLibrary.CreatePath = function(self, Path, Content)
 	local Folders, Destination, File = string.split(Path, "/"), ""
 	File = Folders[#Folders]; table.remove(Folders)
 
-	for i = 1, #Folders do
-		Destination = Destination..Folders[i].."/"
+	for Index = 1, #Folders do
+		Destination = Destination..Folders[Index].."/"
 
 		if not isfolder(Destination) then
 			makefolder(Destination)

@@ -1,6 +1,6 @@
 --[[
 
-	Config Library by Exunys © CC0 1.0 Universal (2023 - 2024)
+	Configuration Library by Exunys © CC0 1.0 Universal (2023)
 	https://github.com/Exunys
 
 ]]
@@ -19,6 +19,7 @@ ConfigLibrary.Encode = function(Table)
 		return HttpService:JSONEncode(Table)
 	end
 end
+
 ConfigLibrary.Decode = function(Content)
 	assert(Content, "ConfigLibrary.Decode => Parameter \"Content\" is missing!")
 	assert(type(Content) == "string", "ConfigLibrary.Decode => Parameter \"Content\" must be of type <string>. Type given: <"..type(Content)..">")
@@ -82,8 +83,13 @@ ConfigLibrary.RestoreValue = function(Value)
 end
 
 ConfigLibrary.CloneTable = function(self, Object, Seen)
-	if type(Object) ~= "table" then return Object end
-	if Seen and Seen[Object] then return Seen[Object] end
+	if type(Object) ~= "table" then
+		return Object
+	end
+	
+	if Seen and Seen[Object] then
+		return Seen[Object]
+	end
 
 	local LocalSeen = Seen or {}
 	local Result = setmetatable({}, getmetatable(Object))
@@ -129,7 +135,7 @@ ConfigLibrary.SaveConfig = function(self, Path, Data)
 
 	local Result = self.Encode(self:ConvertValues(self:CloneTable(Data), "Edit"))
 
-	if select(2, pcall(function() readfile(Path) end)) then
+	if select(2, pcall(reafile, Path)) then
 		self.CreatePath(self, Path, Result)
 	end
 
@@ -148,6 +154,7 @@ ConfigLibrary.CreatePath = function(self, Path, Content)
 	assert(type(Path) == "string", "ConfigLibrary.CreatePath => Parameter \"Path\" must be of type <string>. Type given: <"..type(Path)..">")
 
 	local Folders, Destination, File = string.split(Path, "/"), ""
+
 	File = Folders[#Folders]; table.remove(Folders)
 
 	for Index = 1, #Folders do
